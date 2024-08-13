@@ -1,0 +1,135 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %}Dashboard{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}" />
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+      }
+
+      .navbar {
+        background-color: #4caf50;
+        padding: 10px;
+        color: white;
+      }
+
+      .navbar nav a {
+        color: white;
+        text-decoration: none;
+        margin-right: 15px;
+      }
+
+      .dashboard-container {
+        display: flex;
+        height: calc(100vh - 60px); /* Adjust height based on header/footer */
+      }
+
+      .sidebar {
+        width: 200px;
+        background-color: #4caf50;
+        color: white;
+        padding: 20px;
+        box-sizing: border-box;
+        margin-left: -750px; /* Remove any default margin */
+      }
+
+      .sidebar h2 {
+        font-size: 20px;
+        margin-top: 0;
+      }
+
+      .sidebar ul {
+        list-style-type: none;
+        padding-left: 0;
+      }
+
+      .sidebar ul li {
+        margin: 10px 0;
+      }
+
+      .sidebar ul li a {
+        color: white;
+        text-decoration: none;
+      }
+
+      .sidebar ul li a:hover {
+        text-decoration: underline;
+      }
+
+      .content-container {
+        flex-grow: 1;
+        padding: 20px;
+        justify-content: center;
+        align-items: center;
+        background-color: #f9f9f9;
+        box-sizing: border-box;
+        overflow-y: auto;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="navbar">
+      <h1>Infra Company & Builders Onboarding</h1>
+      <nav>
+        <a href="{% url 'company-list' %}">Companies</a>
+        <a href="{% url 'company-add' %}">Add Company</a>
+        <a href="{% url 'builder-add' %}">Add Builder</a>
+        <a href="{% url 'register' %}">Register</a>
+        <a href="{% url 'login' %}">Login</a>
+      </nav>
+    </div>
+
+    <div class="dashboard-container">
+      <aside class="sidebar">
+        <h2>Dashboard</h2>
+        <ul>
+          <li><a href="#">MD: John</a></li>
+          <li><a href="#">Manager: Jesse</a></li>
+          <li><a href="#">Members</a></li>
+          <li><a href="#">People Associated</a></li>
+        </ul>
+      </aside>
+
+      <div class="content-container">
+        {% block content %}
+        <h1>Welcome to the Dashboard</h1>
+
+        <h2>Your Associated Companies and Roles:</h2>
+        <ul>
+          {% for member in members %}
+          <li>{{ member.company.name }} - {{ member.role }}</li>
+          {% empty %}
+          <li>No associated companies.</li>
+          {% endfor %}
+        </ul>
+
+        <h2>Companies:</h2>
+        <ul>
+          {% for company in companies %}
+          <li>{{ company.name }}</li>
+          {% empty %}
+          <li>No companies available.</li>
+          {% endfor %}
+        </ul>
+
+        <h2>Add a New Company Member:</h2>
+        <form method="post" action="{% url 'company-member-add' %}">
+          {% csrf_token %} {{ company_member_form.as_p }}
+          <button type="submit">Add Member</button>
+        </form>
+
+        {% endblock %}
+      </div>
+    </div>
+
+    <footer class="footer">
+      <p>&copy; 2024 Infra Onboarding. All rights reserved.</p>
+    </footer>
+  </body>
+</html>

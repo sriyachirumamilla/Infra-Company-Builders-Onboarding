@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Add Company Member</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #f0f0f0;
+        font-family: Arial, sans-serif;
+      }
+
+      .company-member-form {
+        padding: 20px;
+        background-color: #ffffff;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        width: 400px;
+        box-sizing: border-box;
+      }
+
+      .company-member-form h2 {
+        font-size: 24px;
+        color: #333;
+        margin-bottom: 20px;
+        text-align: center;
+      }
+
+      .company-member-form label {
+        font-weight: bold;
+        margin-bottom: 5px;
+      }
+
+      .company-member-form select,
+      .company-member-form input[type='text'],
+      .company-member-form input[type='email'],
+      .company-member-form input[type='number'] {
+        padding: 10px;
+        margin-bottom: 15px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        width: 100%;
+        box-sizing: border-box;
+      }
+
+      .company-member-form button[type='submit'] {
+        padding: 10px;
+        background-color: #4caf50;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+      }
+
+      .company-member-form button[type='submit']:hover {
+        background-color: #45a049;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="company-member-form">
+      <h2>Add Company Member</h2>
+      <form method="post" enctype="multipart/form-data">
+        {% csrf_token %} {{ company_member_form.as_p }}
+        <button type="submit">Add Member</button>
+      </form>
+    </div>
+  </body>
+</html>

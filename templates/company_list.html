@@ -1,0 +1,10 @@
+{% extends "base.html" %} {% block content %}
+<h2>Company List</h2>
+<ul>
+  {% for company in companies %}
+  <li>{{ company.name }}</li>
+  {% empty %}
+  <li>No companies available.</li>
+  {% endfor %}
+</ul>
+{% endblock %}
