@@ -3,7 +3,7 @@ The "Infra Company &amp; Builders Onboarding System" is a web-based platform des
 Technologies Used:
 Frontend: HTML, CSS, JavaScript
 Backend: Django (Python)
-Database: SQLite (or any other Django-supported database)
+Database: SQLite
 Version Control: Git and GitHub
 Key Features:
 
